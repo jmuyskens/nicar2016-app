@@ -1,0 +1,191 @@
+$stripety: repeating-linear-gradient(45deg,#eee,white 4px,white 4px,#eee 8px);
+$selected: papayawhip;
+
+$offset: 28px;
+
+$medium: 768px;
+
+p.body {
+	font-family: serif;
+	line-height: 1.3;
+}
+
+.session {
+	padding: 1rem;
+	padding-left: 2rem;
+
+	/*border-bottom: 1px solid #e5e5e5;*/
+	box-sizing: border-box;
+	position: relative;
+	transition: all 0.5s;
+
+	@media (min-width: $medium) {
+		margin-bottom: 0.5rem;
+		padding-left: 3rem;
+	}
+
+	&.selected {
+		background: $selected;
+		border-radius: 4px;
+
+		/*border-bottom: 1px solid white;*/
+		/*background-image: $stripety;*/
+	}
+
+	&:before {
+		content: '';
+		width: 4px;
+		height: calc(100% + 1rem);
+		left: 11px;
+		top: 0;
+		position: absolute;
+		background: maroon;
+
+		@media (min-width: $medium) {
+			left: 22px;
+		}
+	}
+
+	&:after {
+		content: '';
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		position: absolute;
+		left: 7px;
+		top: $offset - 6px;
+		background-color: white;
+		border: 2px solid maroon;
+
+		@media (min-width: $medium) {
+			left: 18px;
+			top: $offset;
+		}
+	}
+
+	&:first-child:before {
+		height: calc(100% - $offset + 1rem);
+		top: $offset;
+	}
+
+	&:last-child:before {
+		height: $offset;
+	};
+
+	&:last-child:first-child:before {
+		height: 0;
+	}
+
+	&.selected:after {
+		content: '⭐';
+		background: none;
+		border: none;
+		top: $offset - 12px;
+		left: 6px;
+
+		@media (min-width: $medium) {
+			font-size: 25px;
+			top: $offset - 9px;
+			left: 12px;
+		}
+	}
+}
+
+
+
+.info {
+	font-size: 12px;
+	text-transform: uppercase;
+
+	@media (min-width: 480px) {
+		font-size: 14px;
+	}
+}
+
+header {
+	padding: 1rem;
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+	background-color: white;
+
+
+}
+
+.sticky:before,
+.sticky:after {
+    content: '';
+    display: table;
+}
+
+.day {
+	position: relative;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.timeslot {
+	max-width: 550px;
+	margin: 0 auto;
+}
+
+.day .header {
+	padding: 0.1rem 1rem;
+	background: white;
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #eee;
+
+	@media (min-width: $medium) {
+		background: none;
+		border: none;
+		text-align: right;
+		left: 0px;
+
+		h2 {
+			width: 135px;
+		}
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+body, html {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 12px;
+
+	@media (min-width: 480px) {
+		font-size: 16px;
+	}
+}
+
+h1, h2, h3 {
+	font-family: serif;
+}
+
+h2 {
+	font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+h3 {
+	padding: 0;
+	margin-top: 7px;
+	margin-bottom: 10px;
+	font-size: 16px;
+
+	@media (min-width: 480px) {
+		font-size: 20px;
+	}
+}
+
+p {
+	margin-bottom: 10px;
+}
