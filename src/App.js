@@ -7,6 +7,8 @@ import update from 'react-addons-update';
 import classNames from 'classnames';
 import moment from 'moment';
 import StickyFill from 'stickyfill';
+import stickyPosition from 'sticky-position';
+
 
 let stickyfill = StickyFill()
 
@@ -48,7 +50,7 @@ class Session extends Component {
           <Time>{this.props.data.start_time}</Time> - <Time>{this.props.data.end_time}</Time> • {this.props.data.room} • {this.props.data.category}
         </div>
         <p>
-          <b>Speakers:</b>
+          <b>Speakers: </b>
           {this.props.data.speaker}
         </p>
         <p className="body">
@@ -82,11 +84,16 @@ class Day extends Component {
 
 
   componentDidMount() {
-    stickyfill.add(this.refs.header)
+    this.sticky = stickyPosition({
+      primary: this.refs.primary,
+      placeholder: this.refs.placeholder,
+      wrapper: this.refs.wrapper,
+      computeWidth: this.props.computeWidth,
+    })
   }
 
   componentWillUnmount() {
-    stickyfill.remove(this.refs.header)
+    this.sticky.destroy();
   }
 
   render() {
@@ -143,7 +150,7 @@ class Schedule extends Component {
   }
 
   componentDidUpdate() {
-    stickyfill.rebuild()
+    //stickyfill.rebuild()
   }
 
   componentDidMount() {
@@ -152,16 +159,17 @@ class Schedule extends Component {
       if (err) {
         console.log('oh no', err);
       } else {
+        let sessions = nicar;
         if (value) {
           console.log(value);
           let sessions = nicar.map(function(d) {
             d.selected = value[d.url];
             return d;
           });
-          self.setState({'sessions': sessions})
         } else {
           localforage.setItem('nicarSchedule', {});
         }
+        self.setState({'sessions': sessions})
       }
     })
   }
